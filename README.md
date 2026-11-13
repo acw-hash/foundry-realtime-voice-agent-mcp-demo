@@ -11,6 +11,9 @@ transfers. It does not perform real lending decisions or connect real officers.
 Names, identifiers, dates, and financial attributes in the committed fixtures
 are synthetic, not records about real people.
 
+**Trying the phone demo?** Follow the [quick demo guide](./DEMO.md).
+Your host will share the dial-in number and demo access code separately.
+
 ## Get started
 
 1. Follow [subscription preparation](./01_prepare_subscription.md) if needed.
