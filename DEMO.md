@@ -15,15 +15,17 @@ Have the **dial-in number** and **eight-digit demo access code** shared privatel
 by your host. No app or Azure sign-in is needed.
 
 1. **Call the number** from your phone and wait for the receptionist's greeting.
-2. **Say your access code** when asked, speaking each digit clearly.
-3. After verification, say: **"I'd like to speak with Michael Brennan."**
-4. Listen to the name the receptionist finds. If it is Michael Brennan,
-   say **"Yes"** to confirm.
+2. When asked **"How can I help you today?"**, say:
+   **"I'd like to speak with Michael Brennan."**
+3. Then **say your access code** when asked, speaking each digit clearly.
+4. After verification, listen to the name the receptionist finds. If it is
+   Michael Brennan, say **"Yes"** to confirm.
 5. Wait for the acknowledgement that your request was recorded, then **hang up**.
 
 **Optional:** With a fresh valid code from your host, call again and ask for
-**"Brennan"** first. When asked to clarify, give the full name **"Michael Brennan"**
-and confirm the result. This demonstrates clarification rather than guessing.
+**"Brennan"** first. Provide your access code when asked, then give the full name
+**"Michael Brennan"** when asked to clarify and confirm the result.
+This demonstrates clarification rather than guessing.
 
 **Demo limits:** All people and records are fictional. The final routing action is
 simulated; you will not be connected to a real officer. Use only the demo code, not
