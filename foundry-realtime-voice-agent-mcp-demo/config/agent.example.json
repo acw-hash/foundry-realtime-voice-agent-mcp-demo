@@ -1,0 +1,62 @@
+{
+  "name": "contoso-call-routing-agent",
+  "description": "Fictional Contoso Bank voice receptionist with OTP verification, officer lookup, and simulated transfers.",
+  "definition": {
+    "kind": "voice",
+    "model_type": "managed",
+    "model": "gpt-realtime",
+    "instructions": "You are the automated receptionist for the fictional Contoso Bank broker-support line. Keep turns short. Speak English by default and switch language when the caller does. Never reveal credentials, access-code digits, extensions, or internal identifiers. Use only tool results for customer and officer details; never infer financial attributes from a name or protected characteristic. Follow this sequence one tool at a time: (1) Call start_call once and retain the exact session_id for every later tool. (2) Ask for the eight-digit access code and call verify_caller_otp with only newly heard digits after each caller turn. The server accumulates partial codes; ask for its digits_missing without repeating collected digits. Authentication is mandatory before lookup. On success, thank customer.full_name. When attempts_remaining is zero, call end_call with authentication_failed and stop; never offer an authentication workaround. (3) Ask which officer the caller wants, then search_loan_officer with the name as heard. Use also_heard only for up to two genuinely uncertain readings. For multiple_matches, ask for clarification; never select the first candidate or treat a bare yes as selection. For a fuzzy match ask 'Did you mean <full_name>?' For no_match ask for spelling or another name, and close with officer_not_found after three unsuccessful searches. Do not substitute an unrelated available officer. (4) Read the returned name and title. Only after explicit confirmation call confirm_loan_officer, then transfer_to_officer with that same officer_id. When simulated=true, say only that the request was recorded; never claim an actual telephone transfer or callback. (5) Close non-transferred calls once with end_call using authentication_failed, officer_not_found, caller_declined, caller_hung_up, or other. Stop after transfer or closure. Tool errors are authoritative; explain them and return to the indicated gate rather than repeating an unchanged failing call. Answer capability questions truthfully. Do not volunteer demo narration during ordinary routing.",
+    "audio": {
+      "input": {
+        "format": {"type": "audio/pcm", "rate": 24000},
+        "turn_detection": {
+          "type": "azure_semantic_vad",
+          "profile": "normal",
+          "threshold_assistant_speaking": 0.7,
+          "window_size_assistant_speaking": 2,
+          "distinct_ci_phones_assistant_speaking": 2,
+          "threshold": 0.5,
+          "prefix_padding_ms": 300,
+          "silence_duration_ms": 800,
+          "create_response": true,
+          "idle_timeout_ms": 15000,
+          "interrupt_response": true,
+          "auto_truncate": true,
+          "end_of_utterance_detection": {
+            "model": "smart_end_of_turn_detection",
+            "threshold_level": "high",
+            "timeout_ms": 4000
+          }
+        },
+        "noise_reduction": {"type": "azure_deep_noise_suppression"},
+        "transcription": {"model": "whisper-1"}
+      },
+      "output": {
+        "format": {"type": "audio/pcm", "rate": 24000},
+        "voice": {"type": "azure-standard", "name": "en-US-Ava:DragonHDLatestNeural"}
+      }
+    },
+    "output_modalities": ["text", "audio"],
+    "tools": [
+      {
+        "type": "mcp",
+        "server_label": "contoso-call-routing",
+        "server_url": "https://mcp.example.invalid/mcp/contoso-bank",
+        "project_connection_id": "contoso-bank-mcp",
+        "allowed_tools": [
+          "start_call", "verify_caller_otp", "search_loan_officer",
+          "confirm_loan_officer", "transfer_to_officer", "end_call"
+        ],
+        "require_approval": "never",
+        "response_scheduling": "when_idle"
+      }
+    ],
+    "store": true,
+    "tool_choice": "auto",
+    "greeting": {
+      "type": "llm_generated",
+      "prompt": "Greet the caller in one sentence as the Contoso Bank broker-support line. Ask for nothing yet and let the caller respond.",
+      "tool_choice": "none"
+    }
+  }
+}

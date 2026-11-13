@@ -1,0 +1,13 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "environmentName": {"value": "contosomcp-demo"},
+    "location": {"value": "eastus2"},
+    "sessionId": {"value": "<deployment-session-id>"},
+    "deployedBy": {"value": "<deployment-operator>"},
+    "createdAt": {"value": "<deployment-timestamp>"},
+    "deployerObjectId": {"value": "<deployer-object-id>"},
+    "containerImage": {"value": ""}
+  }
+}

@@ -1,0 +1,2 @@
+-r requirements.txt
+azure-mgmt-resource>=23.4,<24

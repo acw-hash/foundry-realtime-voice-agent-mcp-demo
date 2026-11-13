@@ -1,0 +1,54 @@
+# Local environments, caches, state, and logs.
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+*.log
+*.db
+*.db-*
+*.sqlite*
+mcp_server/state/
+
+# Credentials and local settings. Only sanitized examples belong in Git.
+.env
+.env.*
+!.env.example
+*.env
+*.token
+*.password
+*.key
+*.pem
+*.pfx
+*.p12
+*.p8
+*.jks
+*.keystore
+id_rsa*
+id_ed25519*
+/config/*
+!/config/*.example.json
+!/config/*.env.example
+/infra/*.parameters.json
+!/infra/*.parameters.example.json
+
+# Deployment/session artifacts can contain internal URLs and identifiers.
+.copilot-azure/
+.azure/
+*.local.json
+*.candidate.json
+*.sarif
+
+# Recordings and exports have not been approved for publication.
+/recording/
+*.mp4
+*.wav
+*.mp3
+*.m4a
+/data/*
+!/data/officers_20k.json
+/mcp_server/data/*
+!/mcp_server/data/customers.json
